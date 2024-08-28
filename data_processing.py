@@ -17,18 +17,21 @@ def fetch_all_jobs_data(oapi_key):
             'apiKey': oapi_key,
             'pageIndex': page_index,
         }
-        response = requests.get(base_url_jobs, params=params)
-        
-        if response.status_code == 200:
+        try:
+            response = requests.get(base_url_jobs, params=params)
+            response.raise_for_status()  # Raise an HTTPError for bad responses
             jobs = response.json().get('jobs', [])
             if not jobs:
                 break  # No more data
             all_jobs.extend(jobs)
             page_index += 1
-        else:
-            print(f"Error fetching jobs data: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching jobs data: {e}")
             break
-    
+        except json.JSONDecodeError:
+            print("Error decoding JSON response.")
+            break
+
     return all_jobs
 
 # 학과정보 데이터 가져오기 (모든 페이지 처리)
@@ -47,18 +50,21 @@ def fetch_all_major_data(oapi_key, per_page=50):
             'thisPage': page,
             'perPage': per_page
         }
-        response = requests.get(base_url_major, params=params)
-
-        if response.status_code == 200:
+        try:
+            response = requests.get(base_url_major, params=params)
+            response.raise_for_status()  # Raise an HTTPError for bad responses
             majors = response.json().get('dataSearch', {}).get('content', [])
             if not majors:
                 break  # No more data
             all_majors.extend(majors)
             page += 1
-        else:
-            print(f"Error fetching major data: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching major data: {e}")
             break
-    
+        except json.JSONDecodeError:
+            print("Error decoding JSON response.")
+            break
+
     return all_majors
 
 # 데이터 전처리 함수
@@ -72,7 +78,9 @@ def preprocess_data(data, data_type='job'):
                 'work': item.get('work'),
                 'aptitude': item.get('aptit_name', []),
                 'related_certificates': item.get('rel_job_nm', []),
-                'related_departments': item.get('wlb', [])
+                'related_departments': item.get('wlb', []),
+                'wage': item.get('wage'),  # 연봉 수준 정보 추가
+                'salary_level': item.get('salaryLevel')  # 연봉 수준의 레벨 정보 추가
             }
             processed_data.append(processed_item)
     
@@ -90,23 +98,16 @@ def preprocess_data(data, data_type='job'):
 
 # 데이터 저장 함수
 def save_data(jobs_data, major_data):
-    with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
-        json.dump(jobs_data, f, ensure_ascii=False, indent=4)
-    
-    with open('processed_major_data.json', 'w', encoding='utf-8') as f:
-        json.dump(major_data, f, ensure_ascii=False, indent=4)
-    
-    print("Data processing completed and saved to JSON files.")
+    try:
+        with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
+            json.dump(jobs_data, f, ensure_ascii=False, indent=4)
+        print("Jobs data saved to 'processed_jobs_data.json'")
+    except (TypeError, IOError) as e:
+        print(f"Error saving jobs data to JSON file: {e}")
 
-# 메인 실행 함수
-if __name__ == "__main__":
-    # 직업백과 데이터 가져오기 및 전처리
-    jobs_data = fetch_all_jobs_data(oapi_key)
-    processed_jobs_data = preprocess_data(jobs_data, data_type='job')
-    
-    # 학과정보 데이터 가져오기 및 전처리
-    major_data = fetch_all_major_data(oapi_key)
-    processed_major_data = preprocess_data(major_data, data_type='major')
-    
-    # 데이터 저장
-    save_data(processed_jobs_data, processed_major_data)
+    try:
+        with open('processed_major_data.json', 'w', encoding='utf-8') as f:
+            json.dump(major_data, f, ensure_ascii=False, indent=4)
+        print("Major data saved to 'processed_major_data.json'")
+    except (TypeError, IOError) as e:
+        print(f"Error saving major data to JSON file: {e}")
