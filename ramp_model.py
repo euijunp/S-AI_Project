@@ -9,14 +9,14 @@ client = OpenAI(
 )
 
 def generate_career_recommendations(processed_jobs_data, processed_major_data):
-    # 사용자로부터 한글 입력 받기
-    user_input = input("진로 추천을 위한 관심사나 정보를 한글로 입력하세요: ")
+    # 사용자로부터 영어 입력 받기
+    user_input = input("Please enter your interests or information for career recommendations: ")
 
     # 데이터를 모델에 전달하여 추천 생성
     recommendation_prompt = (
-        f"사용자의 관심사: {user_input}, "
-        f"그리고 사용 가능한 직업 및 전공 데이터: {json.dumps(processed_jobs_data[:5])}, {json.dumps(processed_major_data[:5])}, "
-        "이 정보를 바탕으로 사용자의 관심사에 맞는 잠재적인 진로 경로를 추천하고 관련 전공을 제안해 주세요."
+        f"User's interests: {user_input}. "
+        f"Here are some available job and major data: Jobs: {json.dumps(processed_jobs_data[:5])}. Majors: {json.dumps(processed_major_data[:5])}. "
+        "Based on this information, please suggest potential career paths and related majors that align with the user's interests."
     )
     
     try:
