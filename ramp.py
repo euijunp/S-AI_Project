@@ -45,7 +45,8 @@ def fetch_all_major_data(api_key, per_page=50):
             'contentType': 'json',
             'gubun': 'univ_list',
             'thisPage': page,
-            'perPage': per_page
+            'perPage': per_page,
+            "majorSeq": "major_seq"
         }
         response = requests.get(base_url_major, params=params)
 
@@ -79,11 +80,12 @@ def preprocess_data(data, data_type='job'):
     elif data_type == 'major':
         for item in data:
             processed_item = {
-                'major_name': item.get('title'),
+                'major_name': item.get('mClass'),
+                'relative_name': item.get('lClass'),
                 'major_code': item.get('majorSeq'),
-                'university': item.get('univ_name'),
-                'department': item.get('department')
-            }
+                'department': item.get('facilName'),
+                #'total_search_count': item.get('enter_field'),
+                }
             processed_data.append(processed_item)
     
     return processed_data
