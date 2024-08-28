@@ -1,1 +1,0 @@
-print(god의준)
