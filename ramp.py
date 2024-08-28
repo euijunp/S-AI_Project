@@ -46,9 +46,9 @@ def preprocess_data(data, data_type='job'):
             processed_item = {
                 'job_name': item.get('job_nm'),
                 'work': item.get('work'),
-                'aptitude': item.get('aptitudeList', []),
-                'related_certificates': item.get('certiList', []),
-                'related_departments': item.get('departList', [])
+                'aptitude': item.get('aptit_name', []),
+                'related_certificates': item.get('rel_job_nm', []),
+                'related_departments': item.get('wlb', [])
             }
             processed_data.append(processed_item)
     
