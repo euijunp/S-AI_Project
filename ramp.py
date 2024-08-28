@@ -1,12 +1,12 @@
 import requests
 import json
 
-# API Å°¿Í ±âº» URL ¼³Á¤
+# API í‚¤ì™€ ê¸°ë³¸ URL ì„¤ì •
 api_key = 'dce42638afaf57784a701d4b5371cdef'
 base_url_jobs = 'https://www.career.go.kr/cnet/front/openapi/jobs.json'
 base_url_major = 'https://www.career.go.kr/cnet/openapi/getOpenApi.json'
 
-# Á÷¾÷¹é°ú µ¥ÀÌÅÍ °¡Á®¿À±â
+# ì§ì—…ë°±ê³¼ ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
 def fetch_jobs_data(api_key, page_index=1):
     params = {
         'apiKey': api_key,
@@ -19,7 +19,7 @@ def fetch_jobs_data(api_key, page_index=1):
         print(f"Error fetching jobs data: {response.status_code}")
         return []
 
-# ÇĞ°úÁ¤º¸ µ¥ÀÌÅÍ °¡Á®¿À±â
+# í•™ê³¼ì •ë³´ ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
 def fetch_major_data(api_key, page=1, per_page=50):
     params = {
         'apiKey': api_key,
@@ -37,7 +37,7 @@ def fetch_major_data(api_key, page=1, per_page=50):
         print(f"Error fetching major data: {response.status_code}")
         return []
 
-# µ¥ÀÌÅÍ ÀüÃ³¸® ÇÔ¼ö
+# ë°ì´í„° ì „ì²˜ë¦¬ í•¨ìˆ˜
 def preprocess_data(data, data_type='job'):
     processed_data = []
     
@@ -64,17 +64,17 @@ def preprocess_data(data, data_type='job'):
     
     return processed_data
 
-# ¸ŞÀÎ ½ÇÇà ÇÔ¼ö
+# ë©”ì¸ ì‹¤í–‰ í•¨ìˆ˜
 if __name__ == "__main__":
-    # Á÷¾÷¹é°ú µ¥ÀÌÅÍ °¡Á®¿À±â ¹× ÀüÃ³¸®
+    # ì§ì—…ë°±ê³¼ ë°ì´í„° ê°€ì ¸ì˜¤ê¸° ë° ì „ì²˜ë¦¬
     jobs_data = fetch_jobs_data(api_key)
     processed_jobs_data = preprocess_data(jobs_data, data_type='job')
     
-    # ÇĞ°úÁ¤º¸ µ¥ÀÌÅÍ °¡Á®¿À±â ¹× ÀüÃ³¸®
+    # í•™ê³¼ì •ë³´ ë°ì´í„° ê°€ì ¸ì˜¤ê¸° ë° ì „ì²˜ë¦¬
     major_data = fetch_major_data(api_key)
     processed_major_data = preprocess_data(major_data, data_type='major')
     
-    # °á°ú Ãâ·Â ¶Ç´Â ÆÄÀÏ·Î ÀúÀå
+    # ë°ì´í„° ì €ì¥
     with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
         json.dump(processed_jobs_data, f, ensure_ascii=False, indent=4)
     

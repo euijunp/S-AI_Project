@@ -1,0 +1,72 @@
+[
+    {
+        "job_name": "국회의원",
+        "work": "국회의원은 선거를 통해 선출된 국민의 대표로서 국회에서 헌법과 법률의 개정 및 의결과 관련된 일을 하고, 정부 예산안을 심의 및 확정하는 등의 업무를 담당합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "행정부고위공무원",
+        "work": "행정부고위공무원은 행정기관 국장급(3급) 이상 공무원으로, 정부의 정책을 결정하고 예산과 법령안을 작성·수정하며 정부 부처의 법령을 해석·적용합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "기업고위임원",
+        "work": "기업고위임원은 경영학적 지식을 바탕으로 기업의 기본 경영방침과 목표를 계획하고, 목표를 달성하기 위한 전략과 정책을 수립합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "외교관",
+        "work": "외교관은 본국을 대표하여 외국에 파견되어 외국과의 교섭을 통해 정치, 경제, 상업적 이익의 보호와 증진을 추구하며, 해외동포와 해외여행을 하는 자국민을 보호합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "교장",
+        "work": "교장은 초등학교나 중학교, 고등학교, 특수학교를 대표하는 책임자로서 학교의 교육, 행정 및 기타 운영 활동에 관련된 모든 제반 사항을 기획하고 조정하는 일을 합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "호텔지배인",
+        "work": "호텔지배인은 객실 예약과 판매, 고객 안내, 식당 운영, 호텔 홍보 등 호텔에서 이루어지는 다양한 업무들이 잘 운영될 수 있도록 각종 활동을 계획하고, 호텔 종사원의 업무를 종합적으로 관리 및 감독하는 일을 합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "영업원",
+        "work": "영업원은 아직 제품이나 서비스에 대해 구매 의사가 없는 사람이 구매를 할 수 있도록 권하거나 판매합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "경영컨설턴트",
+        "work": "경영컨설턴트는 경영과 경제에 대한 지식을 바탕으로 기업경영에 관한 문제점을 분석하고 대책을 연구하며, 사업 추진에 관한 상담과 자문을 제공합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "스마트 팜 구축가",
+        "work": "스마트 팜 구축가는 농업에 정보통신 기술을 접목하여 효율적으로 작물을 재배하거나 가축을 기르는 기술을 개발하고 수집된 정보를 분석합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    },
+    {
+        "job_name": "손실방지전문가",
+        "work": "손실방지전문가는 기업의 손실을 줄이고 안전을 유지하기 위해 시스템을 관리하는 업무를 수행합니다.",
+        "aptitude": [],
+        "related_certificates": [],
+        "related_departments": []
+    }
+]
