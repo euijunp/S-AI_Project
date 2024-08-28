@@ -1,5 +1,5 @@
 # S-AI_Project
-# 진로 추천 AI 서비스 개발
+# RAMP (Roadmap for Aspiring Professionals)
 
 **프로젝트 기간:** 2024-08-28 ~ 2024-08-30 (3일)
 
