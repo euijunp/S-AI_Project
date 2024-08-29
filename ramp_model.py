@@ -8,27 +8,19 @@ client = OpenAI(
     api_key='ramp',  # Ollama API 키 (실질적으로 사용 안 함.)
 )
 
-def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
-    # 추천 프롬프트 생성
-    recommendation_prompt = (
-        f"User's interests: {user_input}. "
-        f"Here are some available job and major data: Jobs: {json.dumps(processed_jobs_data[:5])}. Majors: {json.dumps(processed_major_data[:5])}. "
-        "Based on this information, please suggest potential career paths and related majors that align with the user's interests."
-    )
+def generate_career_recommendations(jobs_data, major_data, user_input):
+    # Example logic for generating recommendations
+    # Ensure this returns a list of recommendations
+    recommendations = []
+
+    # Logic to populate recommendations based on user input
+    # For example, matching user_input with job descriptions or majors
+    for job in jobs_data:
+        if user_input.lower() in job['job_name'].lower() or user_input.lower() in job['work'].lower():
+            recommendations.append(job['job_name'])
     
-    try:
-        # Ollama API 호출
-        response = client.chat.completions.create(
-            model='phi3.5',
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": recommendation_prompt}
-            ]
-        )
-        
-        # 추천 결과 반환
-        return response.choices[0].message.content
+    for major in major_data:
+        if user_input.lower() in major['major_name'].lower():
+            recommendations.append(major['major_name'])
     
-    except Exception as e:
-        print(f"Error generating career recommendations: {e}")
-        return None
+    return recommendations  # This must be a list
