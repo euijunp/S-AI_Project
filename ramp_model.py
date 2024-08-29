@@ -4,7 +4,7 @@ from data_processing import preprocess_and_translate_data  # Corrected function 
 
 client = OpenAI(
     base_url='http://localhost:11434/v1',  # Ollama API 서버 URL
-    api_key='ramp',  # 실제로 필요한 경우 올바른 API 키로 설정해야 함
+    api_key='',  # 실제로 필요한 경우 올바른 API 키로 설정해야 함
 )
 
 def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
@@ -13,8 +13,6 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
         f"The provided job data is: {json.dumps(processed_jobs_data)}. "
         f"The provided major data is: {json.dumps(processed_major_data)}. "
         "Please provide career path and major recommendations that are directly related to the user's interests, job data, and major data. "
-        "Do not include general advice or information not directly related to the user's specified interests or the provided data. "
-        "If the information is insufficient to make specific recommendations, please clearly state that and suggest possible next steps for the user."
     )
     
     try:
