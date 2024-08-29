@@ -21,7 +21,7 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
     try:
         # Ollama API 호출
         response = client.chat.completions.create(
-            model='phi3.5',
+            model='llama3.1',
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": recommendation_prompt}
