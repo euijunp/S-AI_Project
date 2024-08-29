@@ -13,7 +13,7 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
     # 추천 프롬프트 생성
     recommendation_prompt = (
         f"User's interests: {user_input}. "
-        f"Here are some available job and major data: Jobs: {json.dumps(processed_jobs_data[:5])}. Majors: {json.dumps(processed_major_data[:5])}. "
+        f"Here are some available job and major data: Jobs: {json.dumps(processed_jobs_data)}. Majors: {json.dumps(processed_major_data)}. "
         "Based on this information, please suggest potential career paths and related majors that align with the user's interests."
     )
     
