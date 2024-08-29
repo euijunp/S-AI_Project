@@ -12,7 +12,7 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
         f"User's interests are as follows: {user_input}. "
         f"The provided job data is: {json.dumps(processed_jobs_data)}. "
         f"The provided major data is: {json.dumps(processed_major_data)}. "
-        "Please provide career path and major recommendations that are directly related to the user's interests, job data, major data, exam data, and qualification categories data. "
+        "Please Based on the user's input and data, please advise the user on his or her career path long and specifically. "
     )
     
     try:
