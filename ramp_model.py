@@ -15,7 +15,7 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
         f"User's interests: {user_input}. "
         f"Here is job and major data related to the user's interests: Jobs: {json.dumps(processed_jobs_data)}. Majors: {json.dumps(processed_major_data)}. "
         "Please suggest potential career paths and related majors that align with the user's interests based on this data. "
-        "If the information is insufficient or not directly related, provide helpful advice or alternative suggestions that could benefit the user."
+        "If the information is insufficient or not directly related, please provide specific and actionable advice or alternative suggestions that could benefit the user."
     )
     
     try:
