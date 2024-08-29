@@ -72,15 +72,7 @@ def recommend():
         if not user_input:
             return render_template('index.html', error="Please enter your interests.")
 
-<<<<<<< HEAD
         recommendations = generate_career_recommendations(processed_jobs_data, processed_major_data, user_input)
-=======
-        # 진로 추천 생성
-        recommendations = generate_career_recommendations(
-            processed_jobs_data, processed_major_data, 
-            current_exam_data, national_exam_data, qualification_categories_data, user_input
-        )
->>>>>>> 83c7190ae5bc21533150a4dac11c002c69d8a64e
 
         if not recommendations or "Error" in recommendations:
             print(f"Recommendations response: {recommendations}")  # 추가된 로그
