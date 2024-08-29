@@ -44,16 +44,15 @@ def index():
 @app.route('/recommend', methods=['POST'])
 def recommend():
     try:
-        # 사용자로부터 입력 받기
         user_input = request.form.get('user_input')
 
         if not user_input:
             return render_template('index.html', error="Please enter your interests.")
 
-        # 진로 추천 생성
         recommendations = generate_career_recommendations(processed_jobs_data, processed_major_data, user_input)
 
         if not recommendations or "Error" in recommendations:
+            print(f"Recommendations response: {recommendations}")  # 추가된 로그
             return render_template('index.html', error="Could not generate recommendations. Please try again.")
 
         return render_template('result.html', recommendations=recommendations)
