@@ -12,7 +12,6 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
     f"User's profile: Interests and background: {user_input}. "
     f"Career data from CareerNet and WorkNet: {json.dumps(processed_jobs_data)}. "
     f"Major and education data from academic sources: {json.dumps(processed_major_data)}. "
-    f"Certification data from Q-Net: {json.dumps(processed_certification_data)}. "
     "Based on the user's profile and the provided data, generate a personalized career recommendation. "
     "Take into account the user's interests, career prospects, relevant academic fields, and potential certifications. "
     "Ensure the recommendation is detailed and actionable, incorporating relevant job trends and requirements from CareerNet, WorkNet, and Q-Net APIs."
