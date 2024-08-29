@@ -12,7 +12,7 @@ def fetch_all_jobs_data(oapi_key):
     page_index = 1
 
     while True:
-        print(f"\rFetching jobs data for page {page_index}", end="")
+        print(f"Fetching jobs data for page {page_index}...")
         params = {
             'apiKey': oapi_key,
             'pageIndex': page_index,
@@ -21,19 +21,19 @@ def fetch_all_jobs_data(oapi_key):
             response = requests.get(base_url_jobs, params=params)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             jobs = response.json().get('jobs', [])
-            print(f"\nNumber of jobs fetched: {len(jobs)}")
+            print(f"Number of jobs fetched on page {page_index}: {len(jobs)}")
             if not jobs:
                 break  # No more data
             all_jobs.extend(jobs)
             page_index += 1
         except requests.exceptions.RequestException as e:
-            print(f"\nError fetching jobs data: {e}")
+            print(f"Error fetching jobs data: {e}")
             break
         except json.JSONDecodeError:
-            print("\nError decoding JSON response.")
+            print("Error decoding JSON response.")
             break
 
-    print("\nFinished fetching jobs data.")
+    print("Finished fetching jobs data.")
     return all_jobs
 
 def fetch_all_major_data(oapi_key, per_page=50):
@@ -41,7 +41,7 @@ def fetch_all_major_data(oapi_key, per_page=50):
     page = 1
 
     while True:
-        print(f"\rFetching major data for page {page}", end="")
+        print(f"Fetching major data for page {page}...")
         params = {
             'apiKey': oapi_key,
             'svcType': 'api',
@@ -55,18 +55,19 @@ def fetch_all_major_data(oapi_key, per_page=50):
             response = requests.get(base_url_major, params=params)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             majors = response.json().get('dataSearch', {}).get('content', [])
+            print(f"Number of majors fetched on page {page}: {len(majors)}")
             if not majors:
                 break  # No more data
             all_majors.extend(majors)
             page += 1
         except requests.exceptions.RequestException as e:
-            print(f"\nError fetching major data: {e}")
+            print(f"Error fetching major data: {e}")
             break
         except json.JSONDecodeError:
-            print("\nError decoding JSON response.")
+            print("Error decoding JSON response.")
             break
 
-    print("\nFinished fetching major data.")
+    print("Finished fetching major data.")
     return all_majors
 
 def translate_text(text, target_language='en'):
