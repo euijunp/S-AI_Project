@@ -59,6 +59,7 @@ def recommend():
         return render_template('result.html', recommendations=recommendations)
 
     except Exception as e:
+        print(f"Unexpected error: {str(e)}")  # 콘솔에 오류 출력
         return render_template('index.html', error=f"Unexpected error: {str(e)}")
 
 if __name__ == '__main__':
