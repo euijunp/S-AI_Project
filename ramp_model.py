@@ -1,11 +1,12 @@
+# ramp_model.py
 import json
 from openai import OpenAI
-from data_processing import fetch_all_jobs_data, fetch_all_major_data, preprocess_data
+from data_processing import preprocess_data
 
 # OpenAI 클라이언트 설정
 client = OpenAI(
     base_url='http://localhost:11434/v1',  # Ollama API 서버 URL
-    api_key='ramp',  # Ollama API 키 (실질적으로 사용 안 함.)
+    api_key='ramp',  # 실제로 필요한 경우 올바른 API 키로 설정해야 함
 )
 
 def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
@@ -27,8 +28,11 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
         )
         
         # 추천 결과 반환
-        return response.choices[0].message.content
+        if response.choices and response.choices[0].message.content:
+            return response.choices[0].message.content
+        else:
+            return "No recommendations generated."
     
     except Exception as e:
         print(f"Error generating career recommendations: {e}")
-        return None
+        return "Error generating recommendations, please try again."
