@@ -12,7 +12,7 @@ def fetch_all_jobs_data(oapi_key):
     page_index = 1
 
     while True:
-        print(f"Fetching jobs data for page {page_index}")
+        print(f"\rFetching jobs data for page {page_index}", end="")
         params = {
             'apiKey': oapi_key,
             'pageIndex': page_index,
@@ -26,12 +26,13 @@ def fetch_all_jobs_data(oapi_key):
             all_jobs.extend(jobs)
             page_index += 1
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching jobs data: {e}")
+            print(f"\nError fetching jobs data: {e}")
             break
         except json.JSONDecodeError:
-            print("Error decoding JSON response.")
+            print("\nError decoding JSON response.")
             break
 
+    print("\nFinished fetching jobs data.")
     return all_jobs
 
 # 학과정보 데이터 가져오기 (모든 페이지 처리)
@@ -40,7 +41,7 @@ def fetch_all_major_data(oapi_key, per_page=50):
     page = 1
 
     while True:
-        print(f"Fetching major data for page {page}")
+        print(f"\rFetching major data for page {page}", end="")
         params = {
             'apiKey': oapi_key,
             'svcType': 'api',
@@ -59,12 +60,13 @@ def fetch_all_major_data(oapi_key, per_page=50):
             all_majors.extend(majors)
             page += 1
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching major data: {e}")
+            print(f"\nError fetching major data: {e}")
             break
         except json.JSONDecodeError:
-            print("Error decoding JSON response.")
+            print("\nError decoding JSON response.")
             break
 
+    print("\nFinished fetching major data.")
     return all_majors
 
 # 데이터 전처리 함수
@@ -111,3 +113,14 @@ def save_data(jobs_data, major_data):
         print("Major data saved to 'processed_major_data.json'")
     except (TypeError, IOError) as e:
         print(f"Error saving major data to JSON file: {e}")
+
+if __name__ == '__main__':
+    # 데이터 전처리 및 저장
+    jobs_data = fetch_all_jobs_data(oapi_key)
+    processed_jobs_data = preprocess_data(jobs_data, data_type='job')
+
+    major_data = fetch_all_major_data(oapi_key)
+    processed_major_data = preprocess_data(major_data, data_type='major')
+
+    # 전처리된 데이터 저장
+    save_data(processed_jobs_data, processed_major_data)
