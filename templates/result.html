@@ -13,11 +13,7 @@
         {% if recommendations %}
             <div class="recommendations">
                 <h2>Recommended Career Paths</h2>
-                <ul>
-                    {% for recommendation in recommendations %}
-                        <li>{{ recommendation }}</li>
-                    {% endfor %}
-                </ul>
+                <pre>{{ recommendations | safe }}</pre>
             </div>
         {% else %}
             <p>No recommendations found.</p>

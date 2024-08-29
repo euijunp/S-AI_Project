@@ -32,3 +32,7 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
     except Exception as e:
         print(f"Error generating career recommendations: {e}")
         return None
+    
+    except Exception as e:
+        print(f"Error generating career recommendations: {e}")
+        return None
