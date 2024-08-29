@@ -1,16 +1,13 @@
-# ramp_model.py
 import json
 from openai import OpenAI
-from data_processing import preprocess_data
+from data_processing import preprocess_and_translate_data  # Corrected function name
 
-# OpenAI 클라이언트 설정
 client = OpenAI(
     base_url='http://localhost:11434/v1',  # Ollama API 서버 URL
     api_key='ramp',  # 실제로 필요한 경우 올바른 API 키로 설정해야 함
 )
 
 def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
-    # 추천 프롬프트 생성
     recommendation_prompt = (
         f"User's interests are as follows: {user_input}. "
         f"The provided job data is: {json.dumps(processed_jobs_data)}. "
@@ -21,7 +18,6 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
     )
     
     try:
-        # Ollama API 호출
         response = client.chat.completions.create(
             model='llama3.1',
             messages=[
@@ -30,7 +26,6 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data, u
             ]
         )
         
-        # 추천 결과 반환
         if response.choices and response.choices[0].message.content:
             return response.choices[0].message.content
         else:

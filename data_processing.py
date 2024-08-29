@@ -1,12 +1,12 @@
 import requests
 import json
+from deep_translator import GoogleTranslator
 
 # API와 기본 URL 설정
 oapi_key = 'dce42638afaf57784a701d4b5371cdef'
 base_url_jobs = 'https://www.career.go.kr/cnet/front/openapi/jobs.json'
 base_url_major = 'https://www.career.go.kr/cnet/openapi/getOpenApi.json'
 
-# 직업백과 데이터 가져오기 (모든 페이지 처리)
 def fetch_all_jobs_data(oapi_key):
     all_jobs = []
     page_index = 1
@@ -35,7 +35,6 @@ def fetch_all_jobs_data(oapi_key):
     print("\nFinished fetching jobs data.")
     return all_jobs
 
-# 학과정보 데이터 가져오기 (모든 페이지 처리)
 def fetch_all_major_data(oapi_key, per_page=50):
     all_majors = []
     page = 1
@@ -69,36 +68,45 @@ def fetch_all_major_data(oapi_key, per_page=50):
     print("\nFinished fetching major data.")
     return all_majors
 
-# 데이터 전처리 함수
-def preprocess_data(data, data_type='job'):
+def translate_text(text, target_language='en'):
+    if not text:
+        return text
+    try:
+        translator = GoogleTranslator(target_lang=target_language)
+        translated_text = translator.translate(text)
+        return translated_text
+    except Exception as e:
+        print(f"Error translating text: {e}")
+        return text
+
+def preprocess_and_translate_data(data, data_type='job'):
     processed_data = []
     
     if data_type == 'job':
         for item in data:
             processed_item = {
-                'job_name': item.get('job_nm'),
-                'work': item.get('work'),
-                'aptitude': item.get('aptit_name', []),
-                'related_certificates': item.get('rel_job_nm', []),
-                'related_departments': item.get('wlb', []),
-                'wage': item.get('wage'),  # 연봉 수준 정보 추가
-                'salary_level': item.get('salaryLevel')  # 연봉 수준의 레벨 정보 추가
+                'job_name': translate_text(item.get('job_nm', '')),
+                'work': translate_text(item.get('work', '')),
+                'aptitude': translate_text(item.get('aptit_name', '')),
+                'related_certificates': translate_text(item.get('rel_job_nm', '')),
+                'related_departments': translate_text(item.get('wlb', '')),
+                'wage': translate_text(item.get('wage', '')),
+                'salary_level': translate_text(item.get('salaryLevel', ''))
             }
             processed_data.append(processed_item)
     
     elif data_type == 'major':
         for item in data:
             processed_item = {
-                'major_name': item.get('mClass'),
-                'relative_name': item.get('lClass'),
+                'major_name': translate_text(item.get('mClass', '')),
+                'relative_name': translate_text(item.get('lClass', '')),
                 'major_code': item.get('majorSeq'),
-                'department': item.get('facilName')
+                'department': translate_text(item.get('facilName', ''))
             }
             processed_data.append(processed_item)
     
     return processed_data
 
-# 데이터 저장 함수
 def save_data(jobs_data, major_data):
     try:
         with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
@@ -115,12 +123,10 @@ def save_data(jobs_data, major_data):
         print(f"Error saving major data to JSON file: {e}")
 
 if __name__ == '__main__':
-    # 데이터 전처리 및 저장
     jobs_data = fetch_all_jobs_data(oapi_key)
-    processed_jobs_data = preprocess_data(jobs_data, data_type='job')
+    processed_jobs_data = preprocess_and_translate_data(jobs_data, data_type='job')
 
     major_data = fetch_all_major_data(oapi_key)
-    processed_major_data = preprocess_data(major_data, data_type='major')
+    processed_major_data = preprocess_and_translate_data(major_data, data_type='major')
 
-    # 전처리된 데이터 저장
     save_data(processed_jobs_data, processed_major_data)
