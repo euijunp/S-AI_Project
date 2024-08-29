@@ -1,9 +1,13 @@
+# app.py
 from flask import Flask, render_template, request
 import json
 from ramp_model import generate_career_recommendations
 from data_processing import fetch_all_jobs_data, fetch_all_major_data, preprocess_and_translate_data, save_data
 
 app = Flask(__name__)
+
+# API 키 정의
+oapi_key = 'dce42638afaf57784a701d4b5371cdef'
 
 def load_or_update_data():
     # 데이터 로드 또는 업데이트
