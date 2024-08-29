@@ -7,16 +7,11 @@ client = OpenAI(
     api_key='ollama',  # 실제로 필요한 경우 올바른 API 키로 설정해야 함
 )
 
-def generate_career_recommendations(processed_jobs_data, processed_major_data, 
-                                     current_exam_data, national_exam_data, 
-                                     qualification_categories_data, user_input):
+def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
     recommendation_prompt = (
         f"User's interests are as follows: {user_input}. "
         f"The provided job data is: {json.dumps(processed_jobs_data)}. "
         f"The provided major data is: {json.dumps(processed_major_data)}. "
-        f"The current exam data is: {json.dumps(current_exam_data)}. "
-        f"The national exam data is: {json.dumps(national_exam_data)}. "
-        f"The qualification categories data is: {json.dumps(qualification_categories_data)}. "
         "Please provide career path and major recommendations that are directly related to the user's interests, job data, major data, exam data, and qualification categories data. "
     )
     
@@ -41,5 +36,4 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data,
     except Exception as e:
         # 발생한 예외를 포함한 에러 메시지 출력
         print(f"Error generating career recommendations: {e}")
-
         return f"Error generating recommendations: {e}"  # 오류 메시지에 예외 세부 사항 추가
