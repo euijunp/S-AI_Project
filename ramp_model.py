@@ -41,8 +41,5 @@ def generate_career_recommendations(processed_jobs_data, processed_major_data,
     except Exception as e:
         # 발생한 예외를 포함한 에러 메시지 출력
         print(f"Error generating career recommendations: {e}")
-<<<<<<< HEAD
+
         return f"Error generating recommendations: {e}"  # 오류 메시지에 예외 세부 사항 추가
-=======
-        return "Error generating recommendations, please try again."
->>>>>>> 83c7190ae5bc21533150a4dac11c002c69d8a64e
