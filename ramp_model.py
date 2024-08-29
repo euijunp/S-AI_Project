@@ -12,10 +12,12 @@ client = OpenAI(
 def generate_career_recommendations(processed_jobs_data, processed_major_data, user_input):
     # 추천 프롬프트 생성
     recommendation_prompt = (
-        f"User's interests: {user_input}. "
-        f"Here is job and major data related to the user's interests: Jobs: {json.dumps(processed_jobs_data)}. Majors: {json.dumps(processed_major_data)}. "
-        "Please suggest potential career paths and related majors that align with the user's interests based on this data. "
-        "If the information is insufficient or not directly related, please provide specific and actionable advice or alternative suggestions that could benefit the user."
+        f"User's interests are as follows: {user_input}. "
+        f"The provided job data is: {json.dumps(processed_jobs_data)}. "
+        f"The provided major data is: {json.dumps(processed_major_data)}. "
+        "Please provide career path and major recommendations that are directly related to the user's interests, job data, and major data. "
+        "Do not include general advice or information not directly related to the user's specified interests or the provided data. "
+        "If the information is insufficient to make specific recommendations, please clearly state that and suggest possible next steps for the user."
     )
     
     try:
