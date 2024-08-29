@@ -21,6 +21,7 @@ def fetch_all_jobs_data(oapi_key):
             response = requests.get(base_url_jobs, params=params)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             jobs = response.json().get('jobs', [])
+            print(f"\nNumber of jobs fetched: {len(jobs)}")
             if not jobs:
                 break  # No more data
             all_jobs.extend(jobs)
@@ -83,7 +84,8 @@ def preprocess_and_translate_data(data, data_type='job'):
     processed_data = []
     
     if data_type == 'job':
-        for item in data:
+        for index, item in enumerate(data):
+            print(f"Processing job data item {index + 1} / {len(data)}")
             processed_item = {
                 'job_name': translate_text(item.get('job_nm', '')),
                 'work': translate_text(item.get('work', '')),
@@ -96,7 +98,8 @@ def preprocess_and_translate_data(data, data_type='job'):
             processed_data.append(processed_item)
     
     elif data_type == 'major':
-        for item in data:
+        for index, item in enumerate(data):
+            print(f"Processing major data item {index + 1} / {len(data)}")
             processed_item = {
                 'major_name': translate_text(item.get('mClass', '')),
                 'relative_name': translate_text(item.get('lClass', '')),
@@ -109,18 +112,16 @@ def preprocess_and_translate_data(data, data_type='job'):
 
 def save_data(jobs_data, major_data):
     try:
-        with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
-            json.dump(jobs_data, f, ensure_ascii=False, indent=4)
-        print("Jobs data saved to 'processed_jobs_data.json'")
+        if jobs_data is not None:
+            with open('processed_jobs_data.json', 'w', encoding='utf-8') as f:
+                json.dump(jobs_data, f, ensure_ascii=False, indent=4)
+            print(f"Jobs data saved to 'processed_jobs_data.json' with {len(jobs_data)} entries.")
+        if major_data is not None:
+            with open('processed_major_data.json', 'w', encoding='utf-8') as f:
+                json.dump(major_data, f, ensure_ascii=False, indent=4)
+            print(f"Major data saved to 'processed_major_data.json' with {len(major_data)} entries.")
     except (TypeError, IOError) as e:
-        print(f"Error saving jobs data to JSON file: {e}")
-
-    try:
-        with open('processed_major_data.json', 'w', encoding='utf-8') as f:
-            json.dump(major_data, f, ensure_ascii=False, indent=4)
-        print("Major data saved to 'processed_major_data.json'")
-    except (TypeError, IOError) as e:
-        print(f"Error saving major data to JSON file: {e}")
+        print(f"Error saving data to JSON file: {e}")
 
 if __name__ == '__main__':
     jobs_data = fetch_all_jobs_data(oapi_key)

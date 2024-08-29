@@ -10,26 +10,27 @@ app = Flask(__name__)
 oapi_key = 'dce42638afaf57784a701d4b5371cdef'
 
 def load_or_update_data():
-    # 데이터 로드 또는 업데이트
+    processed_jobs_data = []
+    processed_major_data = []
+
+    # 처리된 데이터 파일 로드 시도
     try:
         with open('processed_jobs_data.json', 'r', encoding='utf-8') as f:
             processed_jobs_data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        processed_jobs_data = []
         print("Jobs data file not found or unreadable. Fetching new data...")
         jobs_data = fetch_all_jobs_data(oapi_key)
         processed_jobs_data = preprocess_and_translate_data(jobs_data, data_type='job')
-        save_data(processed_jobs_data, None)  # Save jobs data only
+        save_data(processed_jobs_data, None)  # Jobs data만 저장
 
     try:
         with open('processed_major_data.json', 'r', encoding='utf-8') as f:
             processed_major_data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        processed_major_data = []
         print("Major data file not found or unreadable. Fetching new data...")
         major_data = fetch_all_major_data(oapi_key)
         processed_major_data = preprocess_and_translate_data(major_data, data_type='major')
-        save_data(None, processed_major_data)  # Save major data only
+        save_data(None, processed_major_data)  # Major data만 저장
 
     return processed_jobs_data, processed_major_data
 
