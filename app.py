@@ -1,13 +1,13 @@
-# app.py
 from flask import Flask, render_template, request
 import json
 from ramp_model import generate_career_recommendations
 from data_processing import fetch_all_jobs_data, fetch_all_major_data, preprocess_and_translate_data, save_data
+import os
 
 app = Flask(__name__)
 
-# API 키 정의
-oapi_key = 'dce42638afaf57784a701d4b5371cdef'
+# API 키 정의 (환경 변수에서 불러오기)
+oapi_key = os.getenv('OLLAMA_API_KEY', 'dce42638afaf57784a701d4b5371cdef')  # 환경 변수에서 API 키를 가져오고, 없으면 기본값 사용
 
 def load_or_update_data():
     processed_jobs_data = []
@@ -62,4 +62,5 @@ def recommend():
         return render_template('index.html', error=f"Unexpected error: {str(e)}")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # 서버를 외부에서 접근할 수 있도록 호스트와 포트를 설정
+    app.run(host='0.0.0.0', port=11434, debug=True)  # 모든 IP에서 접근 가능
