@@ -1,0 +1,38 @@
+User's profile: Interests and background: lawyer. The user has expressed a strong interest in this particular field, and the career recommendation should be tailored specifically to their passion and interests. Here is the filtered career data in JSON format based on the user's interest: [
+  {
+    "job_name": "test",
+    "work": "Prosecutors investigate criminal cases based on their legal knowledge and seek a court judgment on suspects, who are suspected of committing a crime, to determine whether or not a crime has been committed.",
+    "aptitude": "Legal and social activities",
+    "related_certificates": "judge, legal expert, legal practitioner, lawyer",
+    "related_departments": "well",
+    "wage": "50 million won↑",
+    "salary_level": ""
+  },
+  {
+    "job_name": "lawyer",
+    "work": "Lawyers represent individuals or groups in court in civil cases involving disputes between individuals and in criminal cases involving criminal acts.",
+    "aptitude": "Legal and social activities",
+    "related_certificates": "",
+    "related_departments": "well",
+    "wage": "50 million won↑",
+    "salary_level": ""
+  },
+  {
+    "job_name": "Lawyer",
+    "work": "We prepare and submit documents to courts and prosecutors' offices at the request of others, and perform all tasks related to application agency for registration and deposit (entrusting money or securities to a deposit institution according to legal procedures) cases.",
+    "aptitude": "Legal and social activities",
+    "related_certificates": "",
+    "related_departments": "Very good",
+    "wage": "50 million won↑",
+    "salary_level": ""
+  },
+  {
+    "job_name": "Legal clerk",
+    "work": "Based on their legal knowledge, legal clerks are primarily responsible for assisting and processing legal-related work under the supervision of legal experts such as lawyers, judicial scriveners, and patent attorneys.",
+    "aptitude": "Office related positions",
+    "related_certificates": "",
+    "related_departments": "well",
+    "wage": "30 million won↑",
+    "salary_level": ""
+  }
+]. Additionally, here is the filtered major and education data in JSON format: []. Please analyze these JSON data sets and use them to provide personalized career recommendations for the user. Make sure to generate the recommendations based on the fields closely related to the user's interest and provide actionable steps, including educational pathways, certifications, and career prospects.
