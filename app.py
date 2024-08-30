@@ -1,10 +1,16 @@
-# app.py
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+import pandas as pd
+import os
 import json
+import requests
 from ramp_model import generate_career_recommendations
 from data_processing import fetch_all_jobs_data, fetch_all_major_data, preprocess_and_translate_data, save_data
 
 app = Flask(__name__)
+
+# 데이터 저장 폴더
+UPLOAD_FOLDER = 'data'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # API 키 정의
 oapi_key = 'dce42638afaf57784a701d4b5371cdef'
@@ -39,7 +45,8 @@ processed_jobs_data, processed_major_data = load_or_update_data()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    files = get_file_list()
+    return render_template('index.html', files=files)
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
@@ -61,5 +68,25 @@ def recommend():
         print(f"Unexpected error: {str(e)}")  # 콘솔에 오류 출력
         return render_template('index.html', error=f"Unexpected error: {str(e)}")
 
+@app.route('/api/files')
+def list_files():
+    """데이터 폴더 내 엑셀 파일 목록을 반환합니다."""
+    files = get_file_list()
+    return jsonify(files)
+
+@app.route('/api/data/<filename>')
+def api_data(filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.exists(file_path):
+        return jsonify({'error': 'File not found'}), 404
+
+    df = pd.read_excel(file_path, engine='openpyxl')
+    data = df.to_dict(orient='records')  # 데이터를 JSON 형식으로 변환
+    return jsonify(data)
+
+def get_file_list():
+    """지정된 폴더 내 엑셀 파일 목록을 가져옵니다."""
+    return [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if f.endswith('.xlsx')]
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
