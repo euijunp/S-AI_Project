@@ -1,88 +1,84 @@
-# S-AI_Project
-# RAMP (Roadmap for Aspiring Professionals)
-URL : http://220.67.145.50:5000
+# S-AI_Project  
+# RAMP (Roadmap for Aspiring Professionals)  
+URL: [http://220.67.145.50:5000](http://220.67.145.50:5000)  
 
-**프로젝트 기간:** 2024-08-28 ~ 2024-08-30 (3일)
+**Project Duration:** August 28, 2024 ~ August 30, 2024 (3 days)  
 
-## 프로젝트 개요
+## Project Overview  
 
-이 프로젝트는 사용자의 진로 선택에 도움을 줄 수 있는 AI 기반의 진로 추천 서비스를 개발하는 것을 목표로 합니다. 커리어넷, 큐넷, 워크넷 등 OpenAPI를 활용하여 직업, 학과, 자격증 정보를 수집하고, 이를 AI 언어 모델에 적용하여 사용자 맞춤형 진로 정보를 제공합니다. 또한, 사용자가 오프라인 상태에서도 서비스를 사용할 수 있는 기능을 제공합니다.
+This project aims to develop an AI-based career recommendation service to assist users in making career choices. By utilizing open APIs from platforms like CareerNet, Q-Net, and WorkNet, we collect data on occupations, academic programs, and certifications. This data is processed using AI language models to deliver personalized career information. Additionally, the service provides offline functionality for user convenience.  
 
-## 프로젝트 목표
+## Project Objectives  
 
-### 주요 목표
-- **AI 기반 진로 추천 서비스 제공:** 사용자에게 적합한 진로를 추천하는 AI 기반 서비스 개발
+### Main Objective  
+- **Deliver AI-driven career recommendation services** tailored to individual users.  
 
-### 세부 목표
-1. **커리어넷, 워크넷 OpenAPI 활용 및 데이터 전처리**
-   - 직업백과와 학과 정보, 전망 등의 정보하여 API를 활용하여 진로 정보를 수집하고 전처리
-2. **언어 모델을 통한 데이터 가공 및 추천 서비스 제공**
-   - 전처리된 데이터를 Ollama - llama3.1 언어 모델에 입력하여 사용자 맞춤형 진로 추천
-3. **On-Device 기능 구현**
-   - 사용자가 오프라인 상태에서도 진로 정보를 확인할 수 있는 기능 제공
-4. **자격증 정보 추가**
-   - 큐넷 OpenAPI를 활용해 관련 자격증 정보를 수집하고 진로 추천에 반영
+### Detailed Objectives  
+1. **Leverage CareerNet and WorkNet APIs for data collection and preprocessing**  
+   - Collect and preprocess data, including occupational encyclopedias, academic programs, and career outlooks.  
+2. **Process data and provide recommendations using language models**  
+   - Input the preprocessed data into the Ollama - llama3.1 language model to deliver personalized career recommendations.  
+3. **Implement on-device functionality**  
+   - Enable offline access to career information for users.  
+4. **Integrate certification information**  
+   - Use Q-Net APIs to collect certification details and incorporate them into career recommendations.  
 
-## 사용된 모델 및 기술
+## Models and Technologies Used  
 
-- **주요 모델:**
-  - Ollama - phi3.5 또는 GPT-4o
-- **사용 기술:**
-  1. **커리어넷 OpenAPI**
-     - 직업 및 학과 정보를 수집하여 사용자 맞춤형 진로 추천
-  2. **큐넷 OpenAPI**
-     - 자격증 정보를 수집하여 진로 선택 시 참고 자료로 제공
-  3. **워크넷 OpenAPI**
-     - 직업의 특성 및 전망, 상세 정보 (자격/면허, 관련직업, 수행직무)
-  4. **Flask**
-     - 웹 애플리케이션 구축 및 클라이언트와의 데이터 통신을 위한 서버 구현
-  5. **deep-translator**
+- **Primary Models:**  
+  - Ollama - phi3.5 or GPT-4o  
 
-## 프로젝트 일정
+- **Technologies Utilized:**  
+  1. **CareerNet OpenAPI**  
+     - Collect occupational and academic program data for personalized recommendations.  
+  2. **Q-Net OpenAPI**  
+     - Gather certification data for career decision support.  
+  3. **WorkNet OpenAPI**  
+     - Provide detailed information on job characteristics, prospects, licenses, related roles, and tasks.  
+  4. **Flask**  
+     - Build the web application and implement server-client data communication.  
+  5. **deep-translator**  
 
-### 1일차 (2024-08-28)
-- **커리어넷 API 데이터 수집 및 전처리**
-  - 박성현: 직업 및 학과 정보 수집(커리어넷)
-  - 박의준: 데이터 전처리 및 언어 모델 적용
-  - 박재한: 기본적인 진로 추천 기능 개발
+## Project Timeline  
 
-### 2일차 (2024-08-29)
-- **웹 기반 서비스 구축 및 테스트**
-  - 박성현: 사용자 인터페이스 설계 및 구현
-  - 박의준: Flask를 활용한 웹 기반 API 구축
-  - 박재한: 진로 추천 기능 테스트 및 개선
+### Day 1 (August 28, 2024)  
+- **Data collection and preprocessing using CareerNet API**  
+  - **Seonghyun Park:** Collect occupational and academic data from CareerNet.  
+  - **Euijun Park:** Perform data preprocessing and apply the language model.  
+  - **Jaehan Park:** Develop basic career recommendation features.  
 
-### 3일차 (2024-08-30)
-- **큐넷 API 데이터 수집 및 통합**
-  - 박성현, 박재한: 자격증 정보 수집 및 기존 추천 서비스와의 통합 작업, 웹페이지 제작 및 연동 시도
-  - 박의준: 전체 서비스 테스트, 디버깅, 최종 결과물 도출
+### Day 2 (August 29, 2024)  
+- **Build and test the web-based service**  
+  - **Seonghyun Park:** Design and implement the user interface.  
+  - **Euijun Park:** Create a web-based API using Flask.  
+  - **Jaehan Park:** Test and refine career recommendation functionalities.  
 
-## 예상 결과물
+### Day 3 (August 30, 2024)  
+- **Integrate Q-Net API data**  
+  - **Seonghyun Park & Jaehan Park:** Collect certification data and integrate it with the recommendation service. Attempt web page creation and integration.  
+  - **Euijun Park:** Perform end-to-end service testing, debugging, and finalize the project output.  
 
-- **진로 추천 AI 웹 서비스**
-  - 직업, 학과, 자격증 정보를 포함한 맞춤형 진로 추천 기능
-  - 사용자 친화적인 웹 인터페이스
-  - 오프라인 기능을 포함한 On-Device 사용 가능
+## Expected Deliverables  
 
-- **프로젝트 문서화 및 보고서**
-  - API 활용 가이드 및 코드 설명
-  - 언어 모델 적용 및 데이터 전처리 과정 설명
-  - 프로젝트 실행 결과 및 향후 개선 방안 제시
+- **AI-based Career Recommendation Web Service**  
+  - Provide customized career recommendations, including occupations, academic programs, and certifications.  
+  - User-friendly web interface.  
+  - On-device functionality for offline usage.  
 
+- **Project Documentation and Report**  
+  - API usage guide and code explanations.  
+  - Overview of language model application and data preprocessing.  
+  - Project outcomes and suggestions for future improvements.  
 
-## 최종 결과물
+## Final Deliverables  
 
-- **진로 추천 AI 웹 서비스**
-  - 직업, 학과 정보를 포함한 맞춤형 진로 추천 기능
-  - 심플한 웹 인터페이스
-  - 오프라인 기능을 포함한 On-Device 사용 가능
+- **AI-based Career Recommendation Web Service**  
+  - Tailored career recommendations with occupational and academic details.  
+  - Simple and intuitive web interface.  
+  - Offline capability for on-device use.  
 
-- **개선 할 점**
-  - 더 다양한 데이터 수집 및 학습
-  - 인터페이스 디자인 개선
-  - AI 학습 속도 개선
-  - 웹페이지와의 연동 작업
-
-
----
-
+- **Areas for Improvement**  
+  - Expand data collection and model training.  
+  - Enhance interface design.  
+  - Optimize AI model training speed.  
+  - Improve integration with web services.  
